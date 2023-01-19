@@ -14,6 +14,11 @@
 		D6431E94297130E100259118 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6431E92297130E100259118 /* Main.storyboard */; };
 		D6431E96297130E300259118 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6431E95297130E300259118 /* Assets.xcassets */; };
 		D6431E99297130E300259118 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6431E97297130E300259118 /* LaunchScreen.storyboard */; };
+		D66EB58829798CCD00CFE13B /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66EB58429798CCC00CFE13B /* RootRouter.swift */; };
+		D66EB58929798CCD00CFE13B /* RootInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66EB58529798CCD00CFE13B /* RootInteractor.swift */; };
+		D66EB58A29798CCD00CFE13B /* RootBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66EB58629798CCD00CFE13B /* RootBuilder.swift */; };
+		D66EB58B29798CCD00CFE13B /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66EB58729798CCD00CFE13B /* RootViewController.swift */; };
+		D66EB58D29798D5A00CFE13B /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66EB58C29798D5A00CFE13B /* AppComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +33,11 @@
 		D6431E95297130E300259118 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6431E98297130E300259118 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6431E9A297130E300259118 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D66EB58429798CCC00CFE13B /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RootRouter.swift; path = "/Users/ihyun_wook/Documents/GitHub/N-BBang/N-BBang/N-BBang/RootRouter.swift"; sourceTree = "<absolute>"; };
+		D66EB58529798CCD00CFE13B /* RootInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RootInteractor.swift; path = "/Users/ihyun_wook/Documents/GitHub/N-BBang/N-BBang/N-BBang/RootInteractor.swift"; sourceTree = "<absolute>"; };
+		D66EB58629798CCD00CFE13B /* RootBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RootBuilder.swift; path = "/Users/ihyun_wook/Documents/GitHub/N-BBang/N-BBang/N-BBang/RootBuilder.swift"; sourceTree = "<absolute>"; };
+		D66EB58729798CCD00CFE13B /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = "/Users/ihyun_wook/Documents/GitHub/N-BBang/N-BBang/N-BBang/RootViewController.swift"; sourceTree = "<absolute>"; };
+		D66EB58C29798D5A00CFE13B /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +58,6 @@
 				50219B1B010EC03A12418640 /* Pods-N-BBang.debug.xcconfig */,
 				CC1B23DE7929918C5992549B /* Pods-N-BBang.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -81,8 +90,13 @@
 		D6431E8B297130E100259118 /* N-BBang */ = {
 			isa = PBXGroup;
 			children = (
+				D66EB58729798CCD00CFE13B /* RootViewController.swift */,
+				D66EB58629798CCD00CFE13B /* RootBuilder.swift */,
+				D66EB58429798CCC00CFE13B /* RootRouter.swift */,
+				D66EB58529798CCD00CFE13B /* RootInteractor.swift */,
 				D6431E8C297130E100259118 /* AppDelegate.swift */,
 				D6431E8E297130E100259118 /* SceneDelegate.swift */,
+				D66EB58C29798D5A00CFE13B /* AppComponent.swift */,
 				D6431E90297130E100259118 /* ViewController.swift */,
 				D6431E92297130E100259118 /* Main.storyboard */,
 				D6431E95297130E300259118 /* Assets.xcassets */,
@@ -207,9 +221,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D66EB58829798CCD00CFE13B /* RootRouter.swift in Sources */,
+				D66EB58D29798D5A00CFE13B /* AppComponent.swift in Sources */,
 				D6431E91297130E100259118 /* ViewController.swift in Sources */,
 				D6431E8D297130E100259118 /* AppDelegate.swift in Sources */,
+				D66EB58B29798CCD00CFE13B /* RootViewController.swift in Sources */,
 				D6431E8F297130E100259118 /* SceneDelegate.swift in Sources */,
+				D66EB58929798CCD00CFE13B /* RootInteractor.swift in Sources */,
+				D66EB58A29798CCD00CFE13B /* RootBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
