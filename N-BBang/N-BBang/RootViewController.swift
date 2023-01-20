@@ -17,5 +17,49 @@ protocol RootPresentableListener: AnyObject {
 
 final class RootViewController: UIViewController, RootPresentable, RootViewControllable {
 
+    private var targetViewController: ViewControllable?
     weak var listener: RootPresentableListener?
+    private var animationInProgress = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .blue
+    }
+    
+    func replaceModal(viewController: ViewControllable) {
+        targetViewController = viewController
+        
+        guard !animationInProgress else {
+            return
+        }
+
+        if presentedViewController != nil {
+            animationInProgress = true
+            dismiss(animated: true) { [weak self] in
+                if self?.targetViewController != nil {
+                    self?.presentTargetViewController()
+                } else {
+                    self?.animationInProgress = false
+                }
+            }
+        } else {
+            presentTargetViewController()
+        }
+    }
+    
+    private func presentTargetViewController() {
+        if let targetViewController = targetViewController {
+            animationInProgress = true
+            let vc = navgi( targetViewController.uiviewController)
+          vc.modalPresentationStyle = .fullScreen
+            
+            present(vc, animated: false) { [weak self] in
+                self?.animationInProgress = false
+            }
+        }
+    }
+    
+    private func navgi(_ view: UIViewController) -> UINavigationController {
+        return UINavigationController(rootViewController: view)
+    }
 }
