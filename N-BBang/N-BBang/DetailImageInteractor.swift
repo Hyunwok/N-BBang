@@ -1,34 +1,34 @@
 //
-//  PhotoInteractor.swift
+//  DetailImageInteractor.swift
 //  N-BBang
 //
-//  Created by 이현욱 on 2023/02/06.
+//  Created by 이현욱 on 2023/02/07.
 //
 
 import RIBs
 import RxSwift
 
-protocol PhotoRouting: ViewableRouting {
+protocol DetailImageRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
 
-protocol PhotoPresentable: Presentable {
-    var listener: PhotoPresentableListener? { get set }
+protocol DetailImagePresentable: Presentable {
+    var listener: DetailImagePresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
-protocol PhotoListener: AnyObject {
+protocol DetailImageListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
-final class PhotoInteractor: PresentableInteractor<PhotoPresentable>, PhotoInteractable, PhotoPresentableListener {
+final class DetailImageInteractor: PresentableInteractor<DetailImagePresentable>, DetailImageInteractable, DetailImagePresentableListener {
 
-    weak var router: PhotoRouting?
-    weak var listener: PhotoListener?
+    weak var router: DetailImageRouting?
+    weak var listener: DetailImageListener?
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: PhotoPresentable) {
+    override init(presenter: DetailImagePresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -43,4 +43,3 @@ final class PhotoInteractor: PresentableInteractor<PhotoPresentable>, PhotoInter
         // TODO: Pause any business logic.
     }
 }
-

@@ -7,30 +7,30 @@
 
 import RIBs
 
-protocol PhotoDependency: Dependency {
+protocol LibraryDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
 }
 
-final class PhotoComponent: Component<PhotoDependency> {
+final class LibraryComponent: Component<LibraryDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
 // MARK: - Builder
 
-protocol PhotoBuildable: Buildable {
+protocol LibraryBuildable: Buildable {
     func build(withListener listener: PhotoListener) -> PhotoRouting
 }
 
-final class PhotoBuilder: Builder<PhotoDependency>, PhotoBuildable {
+final class LibraryBuilder: Builder<LibraryDependency>, LibraryBuildable {
 
-    override init(dependency: PhotoDependency) {
+    override init(dependency: LibraryDependency) {
         super.init(dependency: dependency)
     }
 
     func build(withListener listener: PhotoListener) -> PhotoRouting {
-        let component = PhotoComponent(dependency: dependency)
+        let component = LibraryComponent(dependency: dependency)
         let viewController = PhotoViewController()
         let interactor = PhotoInteractor(presenter: viewController)
         interactor.listener = listener
