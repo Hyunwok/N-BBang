@@ -7,6 +7,9 @@ target 'N-BBang' do
   pod 'RIBs'
   pod 'RxCocoa'
   pod 'SnapKit'
+  pod 'Mantis'
+  pod 'RxDataSources'
+  pod 'WSTagsField'
 
   # Pods for N-BBang
 
