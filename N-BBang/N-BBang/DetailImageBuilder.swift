@@ -20,7 +20,7 @@ final class DetailImageComponent: Component<DetailImageDependency> {
 // MARK: - Builder
 
 protocol DetailImageBuildable: Buildable {
-    func build(withListener listener: DetailImageListener) -> DetailImageRouting
+    func build(withListener listener: DetailImageListener, image: UIImage) -> DetailImageRouting
 }
 
 final class DetailImageBuilder: Builder<DetailImageDependency>, DetailImageBuildable {
@@ -29,9 +29,9 @@ final class DetailImageBuilder: Builder<DetailImageDependency>, DetailImageBuild
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: DetailImageListener) -> DetailImageRouting {
+    func build(withListener listener: DetailImageListener, image: UIImage) -> DetailImageRouting {
         let component = DetailImageComponent(dependency: dependency)
-        let viewController = DetailImageViewController()
+        let viewController = DetailImageViewController(image: image)
         let interactor = DetailImageInteractor(presenter: viewController)
         interactor.listener = listener
         return DetailImageRouter(interactor: interactor, viewController: viewController)

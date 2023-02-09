@@ -19,10 +19,11 @@ protocol DetailImagePresentable: Presentable {
 
 protocol DetailImageListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func deleteImage()
 }
 
 final class DetailImageInteractor: PresentableInteractor<DetailImagePresentable>, DetailImageInteractable, DetailImagePresentableListener {
-
+   
     weak var router: DetailImageRouting?
     weak var listener: DetailImageListener?
 
@@ -41,5 +42,9 @@ final class DetailImageInteractor: PresentableInteractor<DetailImagePresentable>
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+    
+    func deleteImage() {
+        listener?.deleteImage()
     }
 }
