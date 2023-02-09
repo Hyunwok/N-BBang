@@ -8,6 +8,7 @@
 import RIBs
 import RxSwift
 import Contacts
+import ContactsUI
 
 protocol ContactRouting: Routing {
     func cleanupViews()
@@ -15,23 +16,11 @@ protocol ContactRouting: Routing {
 }
 
 protocol ContactListener: AnyObject {
-    func alert(with reason: ContactAlert)
-    
+    func contacts(with: [Person])
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
 final class ContactInteractor: Interactor, ContactInteractable {
-    
-    public var contact: CNContact? {
-        get {
-            return privateContact
-        } set {
-            privateContact = newValue
-        }
-    }
-    
-    private var privateContact: CNContact?
-    
     private let store = CNContactStore()
     weak var router: ContactRouting?
     weak var listener: ContactListener?
@@ -40,13 +29,17 @@ final class ContactInteractor: Interactor, ContactInteractable {
     // in constructor.
     override init() {
         super.init()
-        if !isAuthorizationed() {
-            Task.init {
-                await requestContactAuthorization()
-                getAr()
-            }
+        
+        if isAuthorizationed() {
+            getContacts()
         } else {
-            listener?.alert(with: .unAuthorized)
+            Task.init {
+                if await requestContactAuthorization() {
+                    getContacts()
+                } else {
+                    Alert.showAlert(with: ContactAlert.unAuthorized)
+                }
+            }
         }
     }
     
@@ -57,15 +50,22 @@ final class ContactInteractor: Interactor, ContactInteractable {
         // TODO: Pause any business logic.
     }
     
-    private func getAr() {
-        do {
-            let request = getContactRequest()
-            try store.enumerateContacts(with: request) { [weak self] contact, stop in
-                self?.privateContact = contact
-            print(contact)
+    private func getContacts() {
+        DispatchQueue.global().async {
+            do {
+                var contacts = [Person]()
+                let request = self.getContactRequest()
+                try self.store.enumerateContacts(with: request) { contact, stop in
+                    let person = Person(name: contact.familyName + contact.givenName,
+                                        loan: 0,
+                                        isPaid: false,
+                                        image: contact.thumbnailImageData)
+                    contacts.append(person)
+                }
+                self.listener?.contacts(with: contacts)
+            } catch {
+                Alert.showAlert(with: ContactAlert.failFetch)
             }
-        } catch {
-            listener?.alert(with: .failFetch)
         }
     }
     
@@ -78,11 +78,9 @@ final class ContactInteractor: Interactor, ContactInteractable {
     
     private func requestContactAuthorization() async -> Bool {
         do {
-            try await store.requestAccess(for: .contacts)
-            return true
+            return try await store.requestAccess(for: .contacts)
         } catch {
-            
-            listener?.alert(with: .rejectRequest)
+            Alert.showAlert(with: ContactAlert.rejectRequest)
             return false
         }
     }
