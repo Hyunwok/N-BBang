@@ -1,0 +1,6 @@
+framework module WSTagsFieldPrivate {
+  umbrella header "WSTagsFieldPrivate-umbrella.h"
+
+  export *
+  module * { export * }
+}
