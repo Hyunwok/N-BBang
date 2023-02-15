@@ -20,7 +20,7 @@ final class LibraryComponent: Component<LibraryDependency> {
 // MARK: - Builder
 
 protocol LibraryBuildable: Buildable {
-    func build(withListener listener: PhotoListener) -> PhotoRouting
+    func build(withListener listener: LibraryListener) -> LibraryRouting
 }
 
 final class LibraryBuilder: Builder<LibraryDependency>, LibraryBuildable {
@@ -29,11 +29,11 @@ final class LibraryBuilder: Builder<LibraryDependency>, LibraryBuildable {
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: PhotoListener) -> PhotoRouting {
+    func build(withListener listener: LibraryListener) -> LibraryRouting {
         let component = LibraryComponent(dependency: dependency)
-        let viewController = PhotoViewController()
-        let interactor = PhotoInteractor(presenter: viewController)
+        let viewController = LibraryViewController()
+        let interactor = LibraryInteractor(presenter: viewController)
         interactor.listener = listener
-        return PhotoRouter(interactor: interactor, viewController: viewController)
+        return LibraryRouter(interactor: interactor, viewController: viewController)
     }
 }

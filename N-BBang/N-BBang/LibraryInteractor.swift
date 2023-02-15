@@ -1,5 +1,5 @@
 //
-//  PhotoInteractor.swift
+//  LibraryInteractor.swift
 //  N-BBang
 //
 //  Created by 이현욱 on 2023/02/06.
@@ -13,15 +13,16 @@ protocol LibraryRouting: ViewableRouting {
 }
 
 protocol LibraryPresentable: Presentable {
-    var listener: PhotoPresentableListener? { get set }
+    var listener: LibraryPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
 protocol LibraryListener: AnyObject {
+    func selectedLibraryImage(_ image: UIImage?)
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
-final class LibraryInteractor: PresentableInteractor<LibraryPresentable>, PhotoInteractable, PhotoPresentableListener {
+final class LibraryInteractor: PresentableInteractor<LibraryPresentable>, LibraryInteractable, LibraryPresentableListener {
 
     weak var router: LibraryRouting?
     weak var listener: LibraryListener?
@@ -42,5 +43,8 @@ final class LibraryInteractor: PresentableInteractor<LibraryPresentable>, PhotoI
         super.willResignActive()
         // TODO: Pause any business logic.
     }
+    
+    func selectedLibraryImage(_ image: UIImage?) {
+        listener?.selectedLibraryImage(image)
+    }
 }
-
