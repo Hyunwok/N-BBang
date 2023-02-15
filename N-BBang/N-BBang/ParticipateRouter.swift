@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol ParticipateInteractable: Interactable {
+protocol ParticipateInteractable: Interactable, ContactListener {
     var router: ParticipateRouting? { get set }
     var listener: ParticipateListener? { get set }
 }
@@ -18,9 +18,21 @@ protocol ParticipateViewControllable: ViewControllable {
 
 final class ParticipateRouter: ViewableRouter<ParticipateInteractable, ParticipateViewControllable>, ParticipateRouting {
 
+    private var currentChild: RouterScope?
+    private let contactBuildable: ContactBuildable
+
     // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: ParticipateInteractable, viewController: ParticipateViewControllable) {
+    init(interactor: ParticipateInteractable,
+         viewController: ParticipateViewControllable,
+         contactBuildable: ContactBuildable) {
+        self.contactBuildable = contactBuildable
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
+    }
+    
+    func initContact() {
+        let contact = contactBuildable.build(withListener: interactor)
+        self.currentChild = contact
+        attachChild(contact)
     }
 }

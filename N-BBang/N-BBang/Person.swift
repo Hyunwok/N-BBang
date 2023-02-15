@@ -12,6 +12,7 @@ struct Person: Equatable {
     var name: String
     var loan: Int
     var isPaid: Bool
+    var image: Data?
     
     static func == (lhs: Person, rhs: Person) -> Bool {
         return lhs.uuid == rhs.uuid

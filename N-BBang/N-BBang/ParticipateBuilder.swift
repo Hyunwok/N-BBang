@@ -13,14 +13,19 @@ protocol ParticipateDependency: Dependency {
 }
 
 final class ParticipateComponent: Component<ParticipateDependency> {
-
+    let rootViewController: ParticipateViewController
+    
+    init(rootViewController: ParticipateViewController, dependency: ParticipateDependency) {
+        self.rootViewController = rootViewController
+        super.init(dependency: dependency)
+    }
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
 // MARK: - Builder
 
 protocol ParticipateBuildable: Buildable {
-    func build(withListener listener: ParticipateListener) -> ParticipateRouting
+    func build(withListener listener: ParticipateListener, people: [String]) -> ParticipateRouting
 }
 
 final class ParticipateBuilder: Builder<ParticipateDependency>, ParticipateBuildable {
@@ -29,11 +34,18 @@ final class ParticipateBuilder: Builder<ParticipateDependency>, ParticipateBuild
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: ParticipateListener) -> ParticipateRouting {
-        let component = ParticipateComponent(dependency: dependency)
-        let viewController = ParticipateViewController()
+    func build(withListener listener: ParticipateListener, people: [String]) -> ParticipateRouting {
+        let viewController = ParticipateViewController(people: people)
+        let component = ParticipateComponent(rootViewController: viewController, dependency: dependency)
         let interactor = ParticipateInteractor(presenter: viewController)
+        let contact = ContactBuilder(dependency: component)
         interactor.listener = listener
-        return ParticipateRouter(interactor: interactor, viewController: viewController)
+        return ParticipateRouter(interactor: interactor, viewController: viewController, contactBuildable: contact)
+    }
+}
+
+extension ParticipateComponent: ContactDependency {
+    var ContactViewController: ContactViewControllable {
+        return rootViewController
     }
 }

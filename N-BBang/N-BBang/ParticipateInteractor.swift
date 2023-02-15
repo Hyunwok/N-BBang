@@ -8,16 +8,21 @@
 import RIBs
 import RxSwift
 
+
 protocol ParticipateRouting: ViewableRouting {
+    func initContact()
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
 
 protocol ParticipatePresentable: Presentable {
     var listener: ParticipatePresentableListener? { get set }
+    
+    func contacts(with: [Person])
     // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
 protocol ParticipateListener: AnyObject {
+    func done(with contacts: [Person])
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
@@ -41,5 +46,17 @@ final class ParticipateInteractor: PresentableInteractor<ParticipatePresentable>
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+    
+    func initContact() {
+        router?.initContact()
+    }
+    
+    func done(contacts: [Person]) {
+        listener?.done(with: contacts)
+    }
+    
+    func contacts(with: [Person]) {
+        presenter.contacts(with: with)
     }
 }
