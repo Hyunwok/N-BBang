@@ -19,7 +19,7 @@ protocol CameraPresentable: Presentable {
 }
 
 protocol CameraListener: AnyObject {
-    func selectImage(_ image: UIImage)
+    func selectCameraImage(_ image: UIImage)
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
@@ -46,6 +46,6 @@ final class CameraInteractor: PresentableInteractor<CameraPresentable>, CameraIn
     }
     
     func seleteImage(_ image: UIImage?) {
-        listener?.selectImage(image!)
+        listener?.selectCameraImage(image!)
     }
 }
