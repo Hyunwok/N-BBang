@@ -1,11 +1,11 @@
 //
-//  Alert.swift
+//  AddingAlert.swift
 //  N-BBang
 //
 //  Created by 이현욱 on 2023/02/06.
 //
 
-import Foundation
+import UIKit
 
 enum AddingAlert: Alertable {
     case camera
@@ -26,7 +26,6 @@ enum AddingAlert: Alertable {
     var actions: [UIAlertAction] {
         guard let vc = UIApplication.topViewController() as? AddingViewController else { return [] }
         return [UIAlertAction(title: "사진 촬영", style: .default, handler: { _ in
-            vc.present
             vc.listener?.camera()
         }), UIAlertAction(title: "기존 항목 선택", style: .default, handler: { _ in
             vc.listener?.library()

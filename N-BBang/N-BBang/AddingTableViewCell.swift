@@ -8,9 +8,13 @@
 import UIKit
 
 import SnapKit
+import RxSwift
+import WSTagsFieldPrivate
+import RxCocoa
 
 final class AddingTableViewCell: UITableViewCell {
     static let cellID = "AddingTableViewCell"
+    var disposeBag = DisposeBag()
     
     private lazy var placeLbl: UILabel = {
         let lbl = UILabel()
@@ -23,7 +27,30 @@ final class AddingTableViewCell: UITableViewCell {
     lazy var placeTxtField: UITextField = {
         let txtField = UITextField()
         txtField.placeholder = "장소를 입력해주세요"
+        txtField.returnKeyType = .done
         return txtField
+    }()
+    
+    lazy var tagView: WSTagsField = {
+        let tagsField = WSTagsField()
+        tagsField.spaceBetweenLines = 5.0
+        tagsField.spaceBetweenTags = 10.0
+        tagsField.font = .systemFont(ofSize: 12.0)
+        tagsField.backgroundColor = .white
+        tagsField.tintColor = .green
+        tagsField.textColor = .black
+        tagsField.fieldTextColor = .blue
+        tagsField.selectedColor = .black
+        tagsField.selectedTextColor = .red
+        tagsField.isDelimiterVisible = true
+        tagsField.placeholderColor = .green
+        tagsField.keyboardAppearance = .dark
+        tagsField.returnKeyType = .next
+        tagsField.acceptTagOption = .space
+        tagsField.shouldTokenizeAfterResigningFirstResponder = true
+        tagsField.placeholder = "인원을 입력해주세요"
+        tagsField.textField.isUserInteractionEnabled = false
+        return tagsField
     }()
     
     private lazy var participateLbl: UILabel = {
@@ -32,12 +59,6 @@ final class AddingTableViewCell: UITableViewCell {
         lbl.font = .systemFont(ofSize: 13)
         lbl.textColor = .lightText
         return lbl
-    }()
-    
-    lazy var participateTxtField: UITextField = {
-        let txtField = UITextField()
-        txtField.placeholder = "인원을 입력해주세요"
-        return txtField
     }()
     
     lazy var editMoneyBtn: UIButton = {
@@ -58,20 +79,27 @@ final class AddingTableViewCell: UITableViewCell {
     
     lazy var moneyTxtField: UITextField = {
         let txtField = UITextField()
+        txtField.keyboardType = .numberPad
         txtField.placeholder = "금액을 입력해주세요"
+        txtField.addDoneCancelToolbar()
         return txtField
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        alaoyut()
+        laoyut()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func alaoyut() {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
+    
+    private func laoyut() {
         self.selectionStyle = .none
         let view1 = UIView()
         let view2 = UIView()
@@ -82,7 +110,7 @@ final class AddingTableViewCell: UITableViewCell {
         stackView.addArrangedSubviews([view1, view2, view3])
         
         view1.addSubViews([placeLbl, placeTxtField])
-        view2.addSubViews([participateLbl, participateTxtField])
+        view2.addSubViews([participateLbl, tagView])
         view3.addSubViews([editMoneyBtn, captionBtn, moneyTxtField])
         self.contentView.addSubview(stackView)
         
@@ -95,7 +123,7 @@ final class AddingTableViewCell: UITableViewCell {
             $0.leading.equalToSuperview().inset(10)
         }
         
-        participateTxtField.snp.makeConstraints {
+        tagView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(10)
             $0.leading.equalTo(participateLbl.snp.trailing).offset(10)
             $0.top.bottom.equalToSuperview()
