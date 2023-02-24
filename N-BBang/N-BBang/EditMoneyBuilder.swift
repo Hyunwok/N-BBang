@@ -20,7 +20,7 @@ final class EditMoneyComponent: Component<EditMoneyDependency> {
 // MARK: - Builder
 
 protocol EditMoneyBuildable: Buildable {
-    func build(withListener listener: EditMoneyListener) -> EditMoneyRouting
+    func build(withListener listener: EditMoneyListener, calculate: Calculate) -> EditMoneyRouting
 }
 
 final class EditMoneyBuilder: Builder<EditMoneyDependency>, EditMoneyBuildable {
@@ -29,11 +29,14 @@ final class EditMoneyBuilder: Builder<EditMoneyDependency>, EditMoneyBuildable {
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: EditMoneyListener) -> EditMoneyRouting {
+    func build(withListener listener: EditMoneyListener, calculate: Calculate) -> EditMoneyRouting {
         let component = EditMoneyComponent(dependency: dependency)
-        let viewController = EditMoneyViewController()
+        let viewController = EditMoneyViewController(calculate)
         let interactor = EditMoneyInteractor(presenter: viewController)
         interactor.listener = listener
         return EditMoneyRouter(interactor: interactor, viewController: viewController)
     }
 }
+
+//토스 아이디 만들기 
+//https://toss.me/
