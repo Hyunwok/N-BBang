@@ -149,7 +149,7 @@ final class ParticipateViewController: UIViewController, ParticipatePresentable,
         doneBtn.rx.tap
             .bind { [weak self] in
                 let contacts = self?.searchField.tags ?? []
-                let persons = contacts.map { Person(name: $0.text, loan: 0, isPaid: false) }
+                let persons = contacts.map { Person(name: $0.text, loan: 0, isPaid: false, isEdited: false) }
                 self?.listener?.done(contacts: persons)
                 self?.dismiss(animated: true)
             }.disposed(by: disposeBag)

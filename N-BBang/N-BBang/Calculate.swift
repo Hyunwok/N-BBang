@@ -8,12 +8,11 @@
 import UIKit
 
 struct Calculate: Equatable {
-    static let empty = Calculate(price: 0, members: [], memberCnt: 0, place: "")
+        static let empty = Calculate(price: 0, members: [], recipe: nil, place: "")
     
-    private let id = UUID().uuidString
+    let id = UUID().uuidString
     var price: Int
-    var members: [String]
-    var memberCnt: Int
+    var members: [Person]
     var recipe: UIImage?
     var place: String
     

@@ -8,10 +8,11 @@
 import Foundation
 
 struct Person: Equatable {
-    private let uuid = UUID().uuidString
+    let uuid = UUID().uuidString
     var name: String
     var loan: Int
     var isPaid: Bool
+    var isEdited: Bool
     var image: Data?
     
     static func == (lhs: Person, rhs: Person) -> Bool {

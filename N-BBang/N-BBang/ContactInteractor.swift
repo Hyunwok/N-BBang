@@ -59,6 +59,7 @@ final class ContactInteractor: Interactor, ContactInteractable {
                     let person = Person(name: contact.familyName + contact.givenName,
                                         loan: 0,
                                         isPaid: false,
+                                        isEdited: false,
                                         image: contact.thumbnailImageData)
                     contacts.append(person)
                 }
