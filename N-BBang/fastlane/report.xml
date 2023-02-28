@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000455">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: increment_build_number" time="8.35168">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: match" time="8.690355">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: build_app" time="111.345725">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: upload_to_app_store" time="98.68475">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
