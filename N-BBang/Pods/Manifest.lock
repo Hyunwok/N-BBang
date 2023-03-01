@@ -11,7 +11,7 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.5.0)
   - SnapKit (5.6.0)
-  - WSTagsField (5.4.0)
+  - WSTagsFieldPrivate (1.0.0)
 
 DEPENDENCIES:
   - Mantis
@@ -19,7 +19,7 @@ DEPENDENCIES:
   - RxCocoa
   - RxDataSources
   - SnapKit
-  - WSTagsField
+  - WSTagsFieldPrivate
 
 SPEC REPOS:
   trunk:
@@ -30,7 +30,7 @@ SPEC REPOS:
     - RxDataSources
     - RxSwift
     - SnapKit
-    - WSTagsField
+    - WSTagsFieldPrivate
 
 SPEC CHECKSUMS:
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
@@ -40,8 +40,8 @@ SPEC CHECKSUMS:
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
-  WSTagsField: a4e91b7d866e8c9755332ebcf8123f42f2abd4a0
+  WSTagsFieldPrivate: f102b6b55067a3a3b677b2d72231e7c02e19ce05
 
-PODFILE CHECKSUM: b6bb51148335e447f3c945bddee661b1fb6ca3ac
+PODFILE CHECKSUM: 046cd9b73e6eec17b8eb68676c76b8b77ff6661b
 
 COCOAPODS: 1.11.3

@@ -67,7 +67,7 @@
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
-		<key>WSTagsField.xcscheme</key>
+		<key>WSTagsFieldPrivate.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
